@@ -1,8 +1,7 @@
 #BlueJ class context
-#Thu Oct 01 23:44:59 COT 2026
 comment0.target=NeoFlixException
-comment0.text=\r\n Represent the NeoFlixException Class\r\n \r\n @author Wilson Mendivelso - David Garzon \r\n @version 2/10/2026\r\n
+comment0.text=\r\n\ Represent\ the\ NeoFlixException\ Class\r\n\ \r\n\ @author\ Wilson\ Mendivelso\ -\ David\ Garzon\ \r\n\ @version\ 2/10/2026\r\n
 comment1.params=message
 comment1.target=NeoFlixException(java.lang.String)
-comment1.text=\r\n Constructor for objects of class NeoFlixException\r\n @param message of Exception\r\n
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ NeoFlixException\r\n\ @param\ message\ of\ Exception\r\n
 numComments=2

@@ -1,8 +1,7 @@
 #BlueJ class context
-#Thu Oct 01 23:36:25 COT 2026
 comment0.target=Episode
-comment1.params=title series
-comment1.target=Episode(java.lang.String, Series)
-comment2.params=title series attempts completed votes sumVotes
-comment2.target=Episode(java.lang.String, Series, int, int, int, int)
+comment1.params=title\ series
+comment1.target=Episode(java.lang.String,\ Series)
+comment2.params=title\ series\ attempts\ completed\ votes\ sumVotes
+comment2.target=Episode(java.lang.String,\ Series,\ int,\ int,\ int,\ int)
 numComments=3

@@ -30,7 +30,15 @@ public class Series extends Content{
    */
    @Override
    public int rating() throws NeoFlixException{
-       return 0;
+       if(episodes.size() == 0){
+           throw new NeoFlixException(NeoFlixException.CONTENT_EMPTY);
+       }
+       int sum = 0;
+       for(Episode e: episodes){
+           int rating = e.rating();
+           sum= sum + rating;
+       }
+       return sum/episodes.size();
    }
     
  
@@ -41,13 +49,72 @@ public class Series extends Content{
    */
 
    public int rating(int default_) throws NeoFlixException{
-       return 0;
+       if(episodes.size() == 0){
+           throw new NeoFlixException(NeoFlixException.CONTENT_EMPTY);
+       }
+       int sum = 0;
+       int cont = 0;
+       for(Episode e: episodes){
+           int rating = 0;
+           try{
+               rating = e.rating();
+               cont++;
+           }
+           catch(NeoFlixException ex){
+               if(ex.getMessage().equals(NeoFlixException.VALUE_UNKNOWN)){
+                   rating = default_;
+                   cont++;
+               }
+               
+           }
+           
+           sum= sum + rating;
+       }
+       return sum/cont;
    }
  
    //If an episode has no rating, use the average of the previous episodes or of all episodes, depending on the value of the previous parameter.
    //Throw CONTENT_EMPTY and VALUE_UNKNOWN if either of these cases occurs.
    public int rating(boolean previous) throws NeoFlixException{
-        return 0;
+        if(episodes.size() == 0){
+           throw new NeoFlixException(NeoFlixException.CONTENT_EMPTY);
+        }
+        int sum = 0;
+        for(Episode e: episodes){
+            int rating = 0;
+            try{
+                rating = e.rating();
+            }
+            catch(NeoFlixException ex){
+               if(previous){
+                   if(episodes.indexOf(e) != 0){
+                       rating = sum/episodes.indexOf(e);
+                   }  
+                   else{
+                       throw new NeoFlixException(NeoFlixException.VALUE_UNKNOWN);
+                   }
+               }
+               else{
+                   int cont = 0;
+                   int sumPossible = 0;
+                   for(int i=0; i<episodes.size();i++){
+                       try{
+                           sumPossible=sumPossible+e.rating();
+                           cont++;
+                       }
+                       catch(NeoFlixException exc){
+                           
+                           
+                       }
+                       
+                   }
+                   rating += sumPossible/cont;
+                   
+               }
+            }
+            sum = sum + rating;
+        }
+        return sum/episodes.size();
    }
     
    
