@@ -44,7 +44,8 @@ public class Series extends Content{
  
    /**
    * Returns the calculated rating, using the default value for episodes with an unknown rating and ignoring those with errors.
-   * @return
+   * @param default_ is the default value if rating has no value
+   * @return the series rating
    * @throws NeoFlixException, UNKNOWN_VALUE if the rating cannot be calculated.
    */
 
@@ -73,13 +74,18 @@ public class Series extends Content{
        return sum/cont;
    }
  
-   //If an episode has no rating, use the average of the previous episodes or of all episodes, depending on the value of the previous parameter.
-   //Throw CONTENT_EMPTY and VALUE_UNKNOWN if either of these cases occurs.
+   /**
+    * If an episode has no rating, use the average of the previous episodes or of all episodes, depending on the value of the previous parameter.
+    * @param previous says if it will take previous rating for the unkown or data error values, or if it will take all the values
+    * @return the serie's rating 
+    * @Throw CONTENT_EMPTY and VALUE_UNKNOWN if either of these cases occurs.
+    */
    public int rating(boolean previous) throws NeoFlixException{
         if(episodes.size() == 0){
            throw new NeoFlixException(NeoFlixException.CONTENT_EMPTY);
         }
         int sum = 0;
+        int unkownOrDataError = 0;
         for(Episode e: episodes){
             int rating = 0;
             try{
@@ -95,31 +101,37 @@ public class Series extends Content{
                    }
                }
                else{
-                   int cont = 0;
-                   int sumPossible = 0;
-                   for(int i=0; i<episodes.size();i++){
-                       try{
-                           sumPossible=sumPossible+e.rating();
-                           cont++;
-                       }
-                       catch(NeoFlixException exc){
-                           
-                           
-                       }
-                       
-                   }
-                   rating += sumPossible/cont;
-                   
+                   unkownOrDataError++;
                }
             }
             sum = sum + rating;
         }
+        while(unkownOrDataError > 0){
+            sum+= sum/(episodes.size()-unkownOrDataError);
+            unkownOrDataError--;
+        }
         return sum/episodes.size();
    }
     
-   
-   public int popularity() throws NeoFlixException{
-       return 0;
+   /**
+    * Calculates the popularity of a serie, if it has episodes with unkown values, it will take them as popularity of 0.
+    * @Throws NeoFlixException CONTENT_EMPTY if the series has no episodes
+    */
+    public int popularity() throws NeoFlixException{
+       int sum = 0;
+       if(episodes.size() == 0){
+           throw new NeoFlixException(NeoFlixException.CONTENT_EMPTY);
+        }
+       for(Episode e: episodes){
+           try{
+               sum += e.popularity();
+           }
+           catch(NeoFlixException ex){
+               sum += 0;
+           }
+       }
+       
+       return sum/episodes.size();
    }
     
     
