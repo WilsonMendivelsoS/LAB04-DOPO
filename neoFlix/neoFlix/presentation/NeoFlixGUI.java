@@ -231,10 +231,20 @@ public class NeoFlixGUI extends JFrame{
     private void actionSearch(){
         String patronBusqueda=textSearch.getText();
         String answer = "";
-        if(patronBusqueda.length() > 0) {
-            answer = neoFlix.search(patronBusqueda);
+        try{
+            if(patronBusqueda.length() > 0) {
+                answer = neoFlix.search(patronBusqueda);
+            }
+            textResults.setText(answer);
         }
-        textResults.setText(answer);
+        catch (Exception e){
+            Log.record(e);
+            
+            JOptionPane.showMessageDialog(this, "Ups, ha ocurrido un error al buscar usando: " + patronBusqueda);
+        
+            textResults.setText("");
+        }
+        
     } 
     
    public static void main(String args[]){

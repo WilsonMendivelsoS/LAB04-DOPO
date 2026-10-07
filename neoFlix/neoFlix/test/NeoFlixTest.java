@@ -168,4 +168,25 @@ public class NeoFlixTest{
                             ">Wilson's Start\n";
         assertEquals(esperado, neoFlix.toString());
     }
+    
+     /**
+     * Should search the serie that has by default.
+     */
+    @Test
+    public void shouldSearchTheSerieThatHasByDefault(){
+        NeoFlix neoFlix = new NeoFlix();
+        String esperado = "6 elementos\n"+
+                            ">The Hidden Village ( 60 - 8 )\n"+
+                            ">The First Mission*** Indicadores incompletos\n"+
+                            ">The Rival ( 60 - 8 )\n"+
+                            ">The Tournament*** Indicadores incompletos\n"+
+                            ">The Final Battle*** Indicadores incompletos\n"+
+                            ">The Neo Ninja: 2020 ( 24 - 8 )"+
+                                "\n\tThe Hidden Village ( 60 - 8 )"+
+                                "\n\tThe First Mission*** Indicadores incompletos"+
+                                "\n\tThe Rival ( 60 - 8 )"+
+                                "\n\tThe Tournament*** Indicadores incompletos"+
+                                "\n\tThe Final Battle*** Indicadores incompletos\n";
+        assertEquals(esperado, neoFlix.search("T"));
+    }
 }
