@@ -6,6 +6,7 @@ comment2.params=title
 comment2.target=Audiovisual(java.lang.String)
 comment3.params=
 comment3.target=int\ popularity()
+comment3.text=\r\n\ Gives\ the\ popularity\ of\ an\ Audiovisual\ content.\r\n\ @return\ Audiovisual's\ popularity.\r\n
 comment4.params=
 comment4.target=int\ rating()
 comment5.params=withIndicators

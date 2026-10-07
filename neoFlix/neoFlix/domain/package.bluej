@@ -1,18 +1,18 @@
 #BlueJ package file
-dependency1.from=Episode
-dependency1.to=Series
+dependency1.from=Content
+dependency1.to=NeoFlixException
 dependency1.type=UsesDependency
-dependency2.from=Content
-dependency2.to=NeoFlixException
+dependency2.from=Collection
+dependency2.to=Content
 dependency2.type=UsesDependency
 dependency3.from=Collection
-dependency3.to=Content
+dependency3.to=NeoFlixException
 dependency3.type=UsesDependency
-dependency4.from=Collection
+dependency4.from=Audiovisual
 dependency4.to=NeoFlixException
 dependency4.type=UsesDependency
-dependency5.from=Audiovisual
-dependency5.to=NeoFlixException
+dependency5.from=Episode
+dependency5.to=Series
 dependency5.type=UsesDependency
 dependency6.from=Series
 dependency6.to=Episode

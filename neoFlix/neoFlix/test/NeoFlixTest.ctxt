@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=NeoFlixTest
+comment1.params=
+comment1.target=void\ shouldAddAndEpisode()
+comment1.text=\r\n\ Should\ add\ an\ episode\ without\ serie.\r\n
+comment2.params=
+comment2.target=void\ shouldAddASerie()
+comment2.text=\r\n\ Should\ add\ a\ Serie\ without\ episodes.\r\n
+comment3.params=
+comment3.target=void\ shouldAddASerieWithAnEpisode()
+comment3.text=\r\n\ Should\ add\ a\ Serie\ with\ an\ Episode\r\n
+comment4.params=
+comment4.target=void\ ShouldListTheSerieThatHasByDefault()
+comment4.text=\r\n\ Should\ list\ the\ serie\ that\ has\ by\ default.\ \r\n
+comment5.params=
+comment5.target=void\ shouldListIfIAddAnEpisodeAndASerie()
+comment5.text=\r\n\ Should\ list\ if\ I\ add\ an\ episode\ and\ a\ Serie\ to\ neoFlix\r\n
+comment6.params=
+comment6.target=void\ shouldFailIfSerieHasAnEpisodeThatDoesNotExistsYet()
+comment6.text=\r\n\ Should\ \r\n
+numComments=7
