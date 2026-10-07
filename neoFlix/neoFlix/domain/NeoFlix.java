@@ -74,10 +74,39 @@ public class NeoFlix{
     * @param sumVotes
     */
     public void addEpisode(String title, String series, String attempts, String completed, String votes, String sumVotes){ 
-        Series s = (Series) consult(series);
-        Episode e=new Episode(title,s, Integer.parseInt(attempts), Integer.parseInt(completed), Integer.parseInt(votes), Integer.parseInt(sumVotes));
-        contents.add(e);
-        episodes.put(title.toUpperCase(),e); 
+        boolean newEpisode = false;
+        try{
+            newEpisode = newContent(title);
+        }
+        catch(NeoFlixException e){}
+        
+        if(newEpisode){
+            int intAttempts = 0;
+            int intCompleted = 0;
+            int intVotes = 0;
+            int intSumVotes = 0;
+            try{
+                intAttempts = transformToNumber(attempts);
+            }
+            catch(NeoFlixException e){}
+            try{
+                intCompleted = transformToNumber(completed);
+            }
+            catch(NeoFlixException e){}
+            try{
+                intVotes = transformToNumber(votes);
+            }
+            catch(NeoFlixException e){}
+            try{
+                intSumVotes = transformToNumber(sumVotes);
+            }
+            catch(NeoFlixException e){}
+
+            Series s = (Series) consult(series);
+            Episode e=new Episode(title,s, intAttempts, intCompleted, intVotes, intSumVotes);
+            contents.add(e);
+            episodes.put(title.toUpperCase(),e); 
+        }
     }
     
     
@@ -88,12 +117,27 @@ public class NeoFlix{
      * @param theEpisodes the titles of the episodes separated by newlines
     */
     public void addSeries(String title, String year, String theEpisodes){ 
-        Series s = new Series(title,Integer.parseInt(year));
-        String [] aEpisodes= theEpisodes.split("\n");
-        for (String te : aEpisodes){
-            s.addEpisode(episodes.get(te.toUpperCase()));
+        boolean newSerie = false;
+        try{
+            newSerie = newContent(title);
         }
-        contents.add(s);
+        catch(NeoFlixException e){
+            
+        }
+        if(newSerie){
+            int intYear = 0;
+            try{
+                intYear = transformToNumber(year);
+            }
+            catch(NeoFlixException e){}
+            Series s = new Series(title,intYear);
+            String [] aEpisodes= theEpisodes.split("\n");
+            for (String te : aEpisodes){
+                s.addEpisode(episodes.get(te.toUpperCase()));
+            }
+            contents.add(s);    
+        }
+        
     }
 
     /**
@@ -160,5 +204,36 @@ public class NeoFlix{
     public int numberContents(){
         return contents.size();
     }
-
+    
+    /**
+     * Consults if it is a new content
+     * @param title is the title of the content
+     * @return if content exists
+     * @throws NeoFlixException - CONTENT_ALREADY_EXISTS
+     */
+    
+    private boolean newContent(String title) throws NeoFlixException{
+        Content c = consult(title);
+        if(c != null){
+            throw new NeoFlixException(NeoFlixException.CONTENT_ALREADY_EXISTS);
+        }
+        return true;
+    }
+    
+    /**
+     * Transforms a String to an int
+     * @param transform is the String to transform
+     * @return the int
+     * @throws NeoFlixException - NOT_NUMBER
+     */
+    private int transformToNumber(String transform) throws NeoFlixException{
+        int return_ = 0;
+        try{
+            return_ = Integer.parseInt(transform);
+        }
+        catch(java.lang.NumberFormatException e){
+            throw new NeoFlixException(NeoFlixException.NOT_NUMBER);
+        }
+        return return_;
+    }
 }

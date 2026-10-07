@@ -54,11 +54,11 @@ public class NeoFlixTest{
                             ">The Tournament\n"+
                             ">The Final Battle\n"+
                             ">The Neo Ninja: 2020"+
-                        	"\n\tThe Hidden Village"+
-                        	"\n\tThe First Mission"+
-                        	"\n\tThe Rival"+
-                        	"\n\tThe Tournament"+
-                            	"\n\tThe Final Battle\n";
+                            "\n\tThe Hidden Village"+
+                            "\n\tThe First Mission"+
+                            "\n\tThe Rival"+
+                            "\n\tThe Tournament"+
+                                "\n\tThe Final Battle\n";
         assertEquals(esperado, neoFlix.toString());
     }
     /**
@@ -76,11 +76,11 @@ public class NeoFlixTest{
                             ">The Tournament\n"+
                             ">The Final Battle\n"+
                             ">The Neo Ninja: 2020"+
-                        	"\n\tThe Hidden Village"+
-                        	"\n\tThe First Mission"+
-                        	"\n\tThe Rival"+
-                        	"\n\tThe Tournament"+
-                            	"\n\tThe Final Battle\n"+
+                                "\n\tThe Hidden Village"+
+                                "\n\tThe First Mission"+
+                                "\n\tThe Rival"+
+                                "\n\tThe Tournament"+
+                                "\n\tThe Final Battle\n"+
                             ">the fly\n"+
                             ">Breaking bad: 2008"+
                                 "\n\tthe fly\n";
@@ -101,5 +101,71 @@ public class NeoFlixTest{
         catch(NullPointerException e){
             
         }
+    }
+    
+    /**
+     * Should not add a serie if the serie already exists.
+     */
+    @Test
+    public void shouldNotAddASerieIfTheSerieAlreadyExists(){
+        NeoFlix neoFlix = new NeoFlix();
+        neoFlix.addSeries("The Neo Ninja", "2020", "The Hidden Village");
+        String esperado = "6 elementos\n"+
+                            ">The Hidden Village\n"+
+                            ">The First Mission\n"+
+                            ">The Rival\n"+
+                            ">The Tournament\n"+
+                            ">The Final Battle\n"+
+                            ">The Neo Ninja: 2020"+
+                                "\n\tThe Hidden Village"+
+                                "\n\tThe First Mission"+
+                                "\n\tThe Rival"+
+                                "\n\tThe Tournament"+
+                                "\n\tThe Final Battle\n";
+        assertEquals(esperado, neoFlix.toString());
+    }
+    /**
+     * Should not add a episode if the episode already exists
+     */
+    @Test
+    public void shouldNotAddAnEpisodeIfTheEpisodeAlreadyExists(){
+        NeoFlix neoFlix = new NeoFlix();
+        neoFlix.addEpisode("The Hidden Village","?","199","120","50","430");
+        String esperado = "6 elementos\n"+
+                            ">The Hidden Village\n"+
+                            ">The First Mission\n"+
+                            ">The Rival\n"+
+                            ">The Tournament\n"+
+                            ">The Final Battle\n"+
+                            ">The Neo Ninja: 2020"+
+                                "\n\tThe Hidden Village"+
+                                "\n\tThe First Mission"+
+                                "\n\tThe Rival"+
+                                "\n\tThe Tournament"+
+                                "\n\tThe Final Battle\n";
+        assertEquals(esperado, neoFlix.toString());
+    }
+    
+    /**
+     * Should add episodes with strange int values and put them as zero.
+     */
+    @Test
+    public void shouldAddEpisodesWithStrangeIntValues(){
+        NeoFlix neoFlix = new NeoFlix();
+        neoFlix.addEpisode("Wilson's Start", "?", "100", "ninguno:c", "5", "0");
+        String esperado = "7 elementos\n"+
+                            ">The Hidden Village\n"+
+                            ">The First Mission\n"+
+                            ">The Rival\n"+
+                            ">The Tournament\n"+
+                            ">The Final Battle\n"+
+                            ">The Neo Ninja: 2020"+
+                                "\n\tThe Hidden Village"+
+                                "\n\tThe First Mission"+
+                                "\n\tThe Rival"+
+                                "\n\tThe Tournament"+
+                                "\n\tThe Final Battle\n"+
+                            ">Wilson's Start\n";
+        assertEquals(esperado, neoFlix.toString());
     }
 }
