@@ -13,6 +13,8 @@ public class NeoFlixException extends Exception
     public static String VALUE_UNKNOWN = "Value unknown";
     public static String DATA_ERROR = "Data error";
     public static String CONTENT_EMPTY="Content empty";
+    public static String CONTENT_ALREADY_EXISTS =  "Content already exists";
+    public static String NOT_NUMBER = "Some of the content isn't a number";
     /**
      * Constructor for objects of class NeoFlixException
      * @param message of Exception
