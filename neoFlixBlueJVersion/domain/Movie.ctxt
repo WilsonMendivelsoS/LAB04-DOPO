@@ -1,5 +1,8 @@
 #BlueJ class context
+#Sun Oct 18 10:15:05 COT 2026
 comment0.target=Movie
-comment1.params=title\ budge
-comment1.target=Movie(java.lang.String,\ int)
+comment0.text=\r\n Represents a movie within the NeoFlix platform.\r\n
+comment1.params=title budge
+comment1.target=Movie(java.lang.String, int)
+comment1.text=\r\n Creates a new movie.\r\n @param title the title of the movie\r\n @param budge the budget of the movie\r\n
 numComments=2

@@ -6,8 +6,9 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-
+/**
+ * Test class for the NeoFlix main system.
+ */
 public class NeoFlixTest{
     
     /**

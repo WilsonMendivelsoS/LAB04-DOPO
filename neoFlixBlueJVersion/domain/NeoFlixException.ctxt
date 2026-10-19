@@ -1,5 +1,5 @@
 #BlueJ class context
-#Sat Oct 17 14:08:06 COT 2026
+#Sun Oct 18 10:03:31 COT 2026
 comment0.target=NeoFlixException
 comment0.text=\r\n Represent the NeoFlixException Class\r\n \r\n @author Wilson Mendivelso - David Garzon \r\n @version 2/10/2026\r\n
 comment1.params=message

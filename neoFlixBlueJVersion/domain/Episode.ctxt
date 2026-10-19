@@ -1,8 +1,11 @@
 #BlueJ class context
-#Sat Oct 17 14:14:12 COT 2026
+#Sun Oct 18 10:02:20 COT 2026
 comment0.target=Episode
+comment0.text=\r\n Represents an episode that is part of a series.\r\n
 comment1.params=title series
 comment1.target=Episode(java.lang.String, Series)
+comment1.text=\r\n Creates a new episode and associates it with a series.\r\n @param title the title of the episode\r\n @param series the series to which it belongs\r\n
 comment2.params=title series attempts completed votes sumVotes
 comment2.target=Episode(java.lang.String, Series, int, int, int, int)
+comment2.text=\r\n Creates a new episode with its viewing and rating metrics.\r\n @param title the title of the episode\r\n @param series the series to which it belongs\r\n @param attempts number of viewing attempts\r\n @param completed completed viewings\r\n @param votes number of votes received\r\n @param sumVotes total sum of the ratings\r\n
 numComments=3

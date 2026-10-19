@@ -1,5 +1,7 @@
 package domain;  
-
+/**
+ * Represents generic audiovisual content with viewing and rating metrics.
+ */
 public abstract class Audiovisual extends Content{
     
     private int attempts;
@@ -7,7 +9,14 @@ public abstract class Audiovisual extends Content{
     private int votes;
     private int sumVotes; 
     //INV: 0<=completed<=attempts and 0<=votes and 0<=sumVotes<=votes*10
-
+    /**
+     * Creates audiovisual content establishing all its metrics.
+     * @param title the title of the content
+     * @param attempts viewing attempts
+     * @param completed completed viewings
+     * @param votes number of votes received
+     * @param sumVotes total sum of votes
+     */
     public Audiovisual(String title, int attempts, int completed, int votes, int sumVotes){
         super(title);
         this.attempts=attempts;
@@ -16,7 +25,10 @@ public abstract class Audiovisual extends Content{
         this.sumVotes=sumVotes;
     }
     
- 
+    /**
+     * Creates audiovisual content initializing its metrics to zero.
+     * @param title the title of the content
+     */
     public Audiovisual(String title){
         this(title,0,0,0,0);
     }

@@ -1,11 +1,12 @@
 #BlueJ class context
+#Sun Oct 18 10:15:05 COT 2026
 comment0.target=Collection
-comment1.params=title\ theme
-comment1.target=Collection(java.lang.String,\ java.lang.String)
-comment2.params=
-comment2.target=int\ popularity()
-comment3.params=
-comment3.target=int\ rating()
+comment0.text=\r\n Represents a thematic collection of different contents.\r\n
+comment1.params=title theme
+comment1.target=Collection(java.lang.String, java.lang.String)
+comment1.text=\r\n Creates a new collection.\r\n @param title the title of the collection\r\n @param theme the central theme or category of the collection\r\n
+comment2.target=int popularity()
+comment3.target=int rating()
 comment4.params=withIndicators
-comment4.target=java.lang.String\ data(boolean)
+comment4.target=java.lang.String data(boolean)
 numComments=5

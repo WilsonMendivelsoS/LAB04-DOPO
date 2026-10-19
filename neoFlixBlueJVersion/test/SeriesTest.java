@@ -7,7 +7,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
+/**
+ * Test class for the Series domain logic.
+ */
 public class SeriesTest{
    
  

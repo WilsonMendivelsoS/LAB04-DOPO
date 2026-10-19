@@ -1,4 +1,5 @@
 #BlueJ class context
+#Sun Oct 18 10:15:05 COT 2026
 comment0.target=Log
-comment0.text=\r\n\ \r\n
+comment0.text=\r\n Class in charge of recording system errors and exceptions in a text file.\r\n
 numComments=1

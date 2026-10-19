@@ -52,7 +52,8 @@ public class NeoFlix{
 
     /**
      * Consult a contents
-     * @param name
+     * @param name the name of the content to be consulted
+     * @return the content if found, null otherwise
      */
     public Content consult(String name){
         Content c=null;
@@ -66,12 +67,12 @@ public class NeoFlix{
     
     /**
     * Adds a new episode.
-    * @param title
-    * @param series
-    * @param attempts
-    * @param completed
-    * @param votes
-    * @param sumVotes
+    * @param title the title of the episode
+    * @param series the name of the series to which the episode belongs
+    * @param attempts the number of viewing attempts
+    * @param completed the number of completed viewings
+    * @param votes the number of votes received
+    * @param sumVotes the total sum of votes
     */
     public void addEpisode(String title, String series, String attempts, String completed, String votes, String sumVotes){ 
         boolean newEpisode = false;
@@ -111,11 +112,10 @@ public class NeoFlix{
     
     
     /**
-     * Add a new series
-     * @param title
-     * @param year
-     * @param theEpisodes the titles of the episodes separated by newlines
-    */
+     * Returns the contents whose title starts with the given prefix
+     * @param prefix the prefix to search for in titles
+     * @return a list of contents that match the prefix
+     */
     public void addSeries(String title, String year, String theEpisodes){ 
         boolean newSerie = false;
         try{
@@ -162,7 +162,7 @@ public class NeoFlix{
      * Return the data of the selected contents
      * @param selected the selected contents
      * @param withIndicators true if indicators should be included
-     * @return  
+     * @return the textual representation of the selected contents
      */
     public String data(ArrayList<Content> selected, boolean withIndicators){
         StringBuffer answer=new StringBuffer();
@@ -179,10 +179,10 @@ public class NeoFlix{
     }
     
     
-     /**
+    /**
      * Return the data of episodes with a prefix
-     * @param prefix
-     * @return  
+     * @param prefix the prefix to search for
+     * @return the data of the contents matching the prefix
      */ 
     public String search(String prefix){
         return data(select(prefix),true);
@@ -191,15 +191,15 @@ public class NeoFlix{
     
     /**
      * Return the data of all episodes
-     * @return  
-     */    
+     * @return the data of all registered contents
+     */  
     public String toString(){
         return data(contents,false);
     }
     
     /**
      * Consult the number of episodes
-     * @return 
+     * @return the total number of contents in NeoFlix
      */
     public int numberContents(){
         return contents.size();

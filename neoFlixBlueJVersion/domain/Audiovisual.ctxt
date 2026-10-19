@@ -1,10 +1,13 @@
 #BlueJ class context
-#Sat Oct 17 14:14:12 COT 2026
+#Sun Oct 18 10:03:24 COT 2026
 comment0.target=Audiovisual
+comment0.text=\r\n Represents generic audiovisual content with viewing and rating metrics.\r\n
 comment1.params=title attempts completed votes sumVotes
 comment1.target=Audiovisual(java.lang.String, int, int, int, int)
+comment1.text=\r\n Creates audiovisual content establishing all its metrics.\r\n @param title the title of the content\r\n @param attempts viewing attempts\r\n @param completed completed viewings\r\n @param votes number of votes received\r\n @param sumVotes total sum of votes\r\n
 comment2.params=title
 comment2.target=Audiovisual(java.lang.String)
+comment2.text=\r\n Creates audiovisual content initializing its metrics to zero.\r\n @param title the title of the content\r\n
 comment3.target=int popularity()
 comment3.text=\r\n Gives the popularity of an Audiovisual content.\r\n @return Audiovisual's popularity.\r\n
 comment4.target=int rating()
