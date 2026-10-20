@@ -29,21 +29,31 @@ public class NeoFlix{
     private void addSomeSeries(){
         
         String [][] episodes= {{"The Hidden Village","199","120","50","430"},
-                               {"The First Mission","126","140","60","510"},
+                               {"The First Mission","140","126","60","510"},
                                {"The Rival","199","120","50","430"},
-                               {"The Tournament","162","180", "90", "810"},
-                               {"The Final Battle","190", "200", "120", "1080"}};
+                               {"The Tournament","180","162", "90", "810"},
+                               {"The Final Battle","200", "190", "120", "1080"}};
         StringBuffer titles=new StringBuffer();
         for (String [] e : episodes){
             titles.append(e[0]+"\n");
         }
         
         for (String [] e: episodes){
-            addEpisode(e[0],"?", e[1],e[2],e[3],e[4]);
+            try{
+                addEpisode(e[0],"?", e[1],e[2],e[3],e[4]);
+            }
+            catch(NeoFlixException ex){
+                
+            }
         }
         String [][] series = {{"The Neo Ninja", "2020", titles.toString()}};
         for (String [] s: series){
-            addSeries(s[0],s[1],s[2]);
+            try{
+                addSeries(s[0],s[1],s[2]);
+            }
+            catch(NeoFlixException ex){
+                
+            }
         }
 
 
@@ -66,84 +76,64 @@ public class NeoFlix{
 
     
     /**
-    * Adds a new episode.
-    * @param title the title of the episode
-    * @param series the name of the series to which the episode belongs
-    * @param attempts the number of viewing attempts
-    * @param completed the number of completed viewings
-    * @param votes the number of votes received
-    * @param sumVotes the total sum of votes
-    */
-    public void addEpisode(String title, String series, String attempts, String completed, String votes, String sumVotes){ 
-        boolean newEpisode = false;
-        try{
-            newEpisode = newContent(title);
-        }
-        catch(NeoFlixException e){}
-        
-        if(newEpisode){
-            int intAttempts = 0;
-            int intCompleted = 0;
-            int intVotes = 0;
-            int intSumVotes = 0;
-            try{
-                intAttempts = transformToNumber(attempts);
-            }
-            catch(NeoFlixException e){}
-            try{
-                intCompleted = transformToNumber(completed);
-            }
-            catch(NeoFlixException e){}
-            try{
-                intVotes = transformToNumber(votes);
-            }
-            catch(NeoFlixException e){}
-            try{
-                intSumVotes = transformToNumber(sumVotes);
-            }
-            catch(NeoFlixException e){}
-
-            Series s = (Series) consult(series);
-            Episode e=new Episode(title,s, intAttempts, intCompleted, intVotes, intSumVotes);
-            contents.add(e);
-            episodes.put(title.toUpperCase(),e); 
-        }
+     * Adds a new episode.
+     * @param title
+     * @param series
+     * @param attempts
+     * @param completed
+     * @param votes
+     * @param sumVotes
+     * @throws CONTENT_ALREADY_EXISTS, if content already exists
+     * @throws NOT_NUMBER if some of the content that must be a number isn't
+     * @throws VALUE_UNKNOWN if some of the values are unknown.
+     * @throws DATA_ERROR if the data presents an error
+     */
+    public void addEpisode(String title, String series, String attempts, String completed, String votes, String sumVotes) throws NeoFlixException{
+        boolean newEpisode = newContent(title);
+        int intAttempts = transformToNumber(attempts);
+        int intCompleted = transformToNumber(completed);
+        int intVotes = transformToNumber(votes);
+        int intSumVotes = transformToNumber(sumVotes);
+        Series s = (Series) consult(series);
+        Episode e=new Episode(title,s, intAttempts, intCompleted, intVotes, intSumVotes);
+        e.popularity();
+        e.rating();
+        contents.add(e);
+        episodes.put(title.toUpperCase(),e);
     }
     
     
-    /**
-     * Returns the contents whose title starts with the given prefix
-     * @param prefix the prefix to search for in titles
-     * @return a list of contents that match the prefix
+   /**
+     * Add a new series
+     * @param title
+     * @param year
+     * @param theEpisodes the titles of the episodes separated by newlines
+     * @throws CONTENT_ALREADY_EXISTS, if content already exists
+     * @throws NOT_NUMBER if some of the content that must be a number isn't
+     * @throws VALUE_UNKNOWN if some of the values are unknown.
+     * @throws DATA_ERROR if the data presents an error
+     * @throws EPISODE_DOES_NOT_EXISTS if the episode doesn't exists
      */
-    public void addSeries(String title, String year, String theEpisodes){ 
+    public void addSeries(String title, String year, String theEpisodes) throws NeoFlixException{
         boolean newSerie = false;
-        try{
-            newSerie = newContent(title);
-        }
-        catch(NeoFlixException e){
-            
-        }
-        if(newSerie){
-            int intYear = 0;
-            try{
-                intYear = transformToNumber(year);
+        newSerie = newContent(title);
+        int intYear = transformToNumber(year);
+        Series s = new Series(title,intYear);
+        String [] aEpisodes= theEpisodes.split("\n");
+        for (String te : aEpisodes){
+            Episode ep = episodes.get(te.toUpperCase());
+            if (ep == null){
+                throw new NeoFlixException(NeoFlixException.EPISODE_DOES_NOT_EXISTS);
             }
-            catch(NeoFlixException e){}
-            Series s = new Series(title,intYear);
-            String [] aEpisodes= theEpisodes.split("\n");
-            for (String te : aEpisodes){
-                s.addEpisode(episodes.get(te.toUpperCase()));
-            }
-            contents.add(s);    
+            s.addEpisode(episodes.get(te.toUpperCase()));
         }
-        
+        contents.add(s);
     }
 
     /**
      * Returns the contents whose title starts with the given prefix
      * @param prefix
-     * @return 
+     * @return
      */
     public ArrayList<Content> select(String prefix){
         ArrayList <Content> answers=new ArrayList<Content>();
@@ -151,7 +141,7 @@ public class NeoFlix{
         for(int i=0;i<contents.size();i++){
             if(contents.get(i).getTitle().toUpperCase().startsWith(prefix)){
                 answers.add(contents.get(i));
-            }   
+            }
         }
         return answers;
     }

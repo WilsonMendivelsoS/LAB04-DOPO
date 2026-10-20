@@ -1,5 +1,5 @@
 #BlueJ class context
-#Sat Oct 17 14:14:12 COT 2026
+#Mon Oct 19 18:34:42 COT 2026
 comment0.target=Series
 comment0.text=\r\n Represents a Series in NeoFlix, composed of multiple episodes.\r\n \r\n @author Wilson Mendivelso - David Garzon\r\n @version 2/10/2026\r\n
 comment1.params=title year

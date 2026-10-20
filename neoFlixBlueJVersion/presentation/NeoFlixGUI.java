@@ -216,18 +216,29 @@ public class NeoFlixGUI extends JFrame{
     }    
 
     
-    private void actionList(){
-        textDetails.setText(neoFlix.toString());
-    }
-    
-    private void  actionAdd(){
-        if (episodes.getText().trim().equals("")){
-            neoFlix.addEpisode (title.getText(), "", atttemps.getText(), completed.getText(),votes.getText(),sumVotes.getText());
-        }else{ 
-            neoFlix.addSeries (title.getText(),year.getText(),episodes.getText());
+       private void actionList(){
+        try {
+            textDetails.setText(neoFlix.toString());
+        } catch (Exception e) {
+            Log.record(e);
+            JOptionPane.showMessageDialog(this, "Ups, ha ocurrido un error inesperado al listar.");
         }
     }
-
+    
+    private void actionAdd(){
+        try{
+            if (!year.getText().trim().equals("")) {
+                neoFlix.addSeries(title.getText(), year.getText(), episodes.getText());
+            } else {
+                neoFlix.addEpisode(title.getText(), "", atttemps.getText(), completed.getText(), votes.getText(), sumVotes.getText());
+            }
+        }catch(NeoFlixException e){
+            JOptionPane.showMessageDialog(this, "Ups, ha ocurrido un error inesperado:\n" + e.getMessage());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Ups, ha ocurrido un error inesperado al adicionar.");
+        }
+    }
+    
     private void actionSearch(){
         String patronBusqueda=textSearch.getText();
         String answer = "";
@@ -241,11 +252,10 @@ public class NeoFlixGUI extends JFrame{
             Log.record(e);
             
             JOptionPane.showMessageDialog(this, "Ups, ha ocurrido un error al buscar usando: " + patronBusqueda);
-        
+            
             textResults.setText("");
         }
-        
-    } 
+    }
     
    public static void main(String args[]){
        NeoFlixGUI gui=new NeoFlixGUI();
